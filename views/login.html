@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="log"></div>
+    <form>
+        <input type="text" placeholder="아이디" id="user_id">
+        <input type="password" placeholder="비밀번호" id="user_pwd">
+        <button>로그인</button>
+    </form>
+
+    <script>
+        const form = document.querySelector('form');
+        form.addEventListener('submit', (event)=>{
+            event.preventDefault(); // 원래 있던 기능 처리하지 말라는 의미
+
+            const id = document.querySelector('#user_id');
+            const pwd = document.querySelector('#user_pwd');
+
+            fetch('http://localhost:3000/login',{
+                method: 'POST',
+                headers: {'Content-Type':'application/json'},
+                body: JSON.stringify({id: id.value, pwd: pwd.value})
+            }).then(res=>res.json())
+            .then(res=>{
+                console.log(res);
+                if(res.success){
+                    const log = document.querySelector('.log');
+                    log.textContent = res.user;
+                }else{
+                    location.href = "http://localhost:3000/login";
+                    // history.back(-2); //이전 히스토리 둘 뒤로 가는 것
+                    // history.forward(-2);
+                }
+            })
+
+            // 공백처리
+            id.value = "";
+            pwd.value = "";
+        })
+    </script>
+</body>
+</html>

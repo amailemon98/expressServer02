@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form>
+        <input type="text" placeholder="이름">
+    </form>
+
+    <script>
+        const form = document.querySelector('form');
+        form.addEventListener('submit', (event)=>{
+            event.preventDefault(); // 원래 있던 기능 처리하지 말라는 의미
+
+            const input = document.querySelector('input');
+
+            fetch('http://localhost:3000/register',{
+                method: 'POST',
+                headers: {'Content-Type':'application/json'},
+                body: JSON.stringify({name:input.value})
+            }).then(res=>res.json())
+            .then(res=>console.log(res))
+        })
+    </script>
+</body>
+</html>
