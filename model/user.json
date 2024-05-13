@@ -1,14 +1,32 @@
-[
-    {
-        "numId": 1,
-        "id": "hong",
-        "name": "홍길동",
-        "pwd": "12345"
-    },
-    {
-        "numId": 2,
-        "id": "kim",
-        "name": "김길동",
-        "pwd": "12345"
-    }
+{
+  "login": [
+            {
+              "user_name": "홍길동",
+              "user_id": "hong",
+              "user_pwd": "12345"
+            },
+            {
+              "user_name": "김길동",
+              "user_id": "kim",
+              "user_pwd": "12345"
+            }
+  ],
+  "user" : [
+            {
+              "user_name": "홍길동",
+              "user_id": "hong",
+              "user_pwd": "12345",
+              "user_re_pwd": "12345",
+              "user_email": "hong@naver.com",
+              "user_phone": "010-1234-5678"
+            },
+            {
+              "user_name": "김길동",
+              "user_id": "kim",
+              "user_pwd": "12345",
+              "user_re_pwd": "12345",
+              "user_email": "kim@naver.com",
+              "user_phone": "010-1234-5678"
+            }
 ]
+}

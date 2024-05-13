@@ -4,9 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+        form > input {
+            display: block;
+        }
+    </style>
 </head>
 <body>
-    <div class="log"></div>
+    <div class="log">{{%name%}}</div>
     <form>
         <input type="text" placeholder="아이디" id="user_id">
         <input type="password" placeholder="비밀번호" id="user_pwd">
@@ -20,17 +25,20 @@
 
             const id = document.querySelector('#user_id');
             const pwd = document.querySelector('#user_pwd');
+            
+            // user[target.id] = target.value;
 
             fetch('http://localhost:3000/login',{
                 method: 'POST',
                 headers: {'Content-Type':'application/json'},
-                body: JSON.stringify({id: id.value, pwd: pwd.value})
+                body: JSON.stringify({user_id: id.value, user_pwd: pwd.value})
             }).then(res=>res.json())
             .then(res=>{
                 console.log(res);
                 if(res.success){
-                    const log = document.querySelector('.log');
-                    log.textContent = res.user;
+                    // const log = document.querySelector('.log');
+                    // log.textContent = res.user;
+                    location.href = "http://localhost:3000/";
                 }else{
                     location.href = "http://localhost:3000/login";
                     // history.back(-2); //이전 히스토리 둘 뒤로 가는 것

@@ -4,23 +4,66 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+        form > input{
+            display: block;
+        }
+    </style>
 </head>
 <body>
     <form>
-        <input type="text" placeholder="이름">
+        <input type="text" placeholder="이름" name="user_name" id="user_name">
+        <input type="text" placeholder="아이디" name="user_id" id="user_id">
+        <input type="password" placeholder="비밀번호" name="user_pwd" id="user_pwd">
+        <input type="password" placeholder="비밀번호확인" name="user_re_pwd" id="user_re_pwd">
+        <input type="email" placeholder="이메일" name="user_email" id="user_email">
+        <input type="tel" placeholder="전화번호" name="user_phone" id="user_phone">
+        <!-- <input type="submit" value="전송">
+        <input type="reset" value="취소"> -->
+        <button class="submit">전송</button>
+        <button class="reset">취소</button>
     </form>
 
     <script>
+        const user = {
+
+        };
+        //{user_name: '홍길동', user_pwd: '1234', user_re_pwd: '1234', user_email: 'hong@naver.com', user_phone: '01012345678'}
+
+
+        function createUser(key, value){
+            const user = {}
+            user[key] = value;
+            return user;
+        }
+
+        const inputs = document.querySelectorAll('input');
+            inputs.forEach(input => {
+                input.addEventListener('keyup', ({target})=>{
+                // console.log(target.value, target.getAttribute('id'));
+                // console.log(target.value, target.id); // user_pwd
+
+                user[target.id] = target.value;
+                //{user_name: '홍길동', user_pwd: '1234', user_re_pwd: '1234', user_email: 'hong@naver.com', user_phone: '01012345678'}
+                
+
+
+
+            });
+        });
+
         const form = document.querySelector('form');
         form.addEventListener('submit', (event)=>{
             event.preventDefault(); // 원래 있던 기능 처리하지 말라는 의미
 
-            const input = document.querySelector('input');
+            console.log(user);// submit 버튼을 누르면 user를 확인하고 싶다.
+
+            // id : 몇번째의 회원인지 모름, backend에서 번호 부여
 
             fetch('http://localhost:3000/register',{
                 method: 'POST',
                 headers: {'Content-Type':'application/json'},
-                body: JSON.stringify({name:input.value})
+                body: JSON.stringify(user)
             }).then(res=>res.json())
             .then(res=>console.log(res))
         })
